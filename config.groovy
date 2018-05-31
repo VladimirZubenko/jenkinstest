@@ -27,6 +27,15 @@ branches.each {
                 continueOnBuildFailure()
                 unstableIfWarnings()
             }
+            msBuild {
+                msBuildInstallation('MSBuild 1.8')
+                buildFile('dir1/build_111.proj')
+                args('check')
+                args('another')
+                passBuildVariables()
+                continueOnBuildFailure()
+                unstableIfWarnings()
+            }
             maven("test -Dproject.name=${project}/${branchName}")
         }
     }
