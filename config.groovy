@@ -11,6 +11,15 @@ branches.each {
         steps {
             msBuild {
                 msBuildInstallation('MSBuild 1.8')
+                buildFile('dir1/build111.proj')
+                args('check')
+                args('another')
+                passBuildVariables()
+                continueOnBuildFailure()
+                unstableIfWarnings()
+            }
+            msBuild {
+                msBuildInstallation('MSBuild 1.8')
                 buildFile('dir1/build.proj')
                 args('check')
                 args('another')
@@ -19,19 +28,6 @@ branches.each {
                 unstableIfWarnings()
             }
             maven("test -Dproject.name=${project}/${branchName}")
-        }
-    }
-}
-job('example') {
-    steps {
-        msBuild {
-            msBuildInstallation('MSBuild 1.8')
-            buildFile('dir1/build.proj')
-            args('check')
-            args('another')
-            passBuildVariables()
-            continueOnBuildFailure()
-            unstableIfWarnings()
         }
     }
 }
